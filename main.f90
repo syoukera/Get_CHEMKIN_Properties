@@ -3,7 +3,6 @@
 program main
       use chemkin_params, only: initialize_chemkin_workarray, &
                                 get_tranport_data, get_next_TY
-      ! use senkin_params, only: timeloop, z
       use output, only: make_output
 
       !   ------- user input section ---------
@@ -24,8 +23,6 @@ program main
       real(8) :: Lambda_mix
       !  mean specific heat at constant pressure [ergs/(gm*K)]
       real(8) c_p
-
-      print *, 'aaa'
       
       ! Assurme Y has a same secuence as species in ckout
       data y_cfd /0.00d+00,0.00d+00,0.00d+00,2.20d-01,0.00d+00,0.00d+00,0.00d+00,0.00d+00,0.00d+00, &
@@ -58,12 +55,12 @@ program main
       
       !   ------- chemistry section ---------
 
-      !call get_next_TY(p_cfd, t_cfd, y_cfd, delta_t_cfd, tols_cfd)
-      !
-      !write(6, *) 'temperature [K]'
-      !write(6, *) t_cfd
-      !write(6, *) 'mass fractions [-]'
-      !write(6, *) y_cfd
+      call get_next_TY(p_cfd, t_cfd, y_cfd, delta_t_cfd, tols_cfd)
+      
+      write(6, *) 'temperature [K]'
+      write(6, *) t_cfd
+      write(6, *) 'mass fractions [-]'
+      write(6, *) y_cfd
       
       ! call timeloop()
       
